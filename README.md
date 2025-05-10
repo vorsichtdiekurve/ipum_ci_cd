@@ -1,34 +1,31 @@
-## Lab 11 - Deployment & CI/CD
+1. To init project run 
+```bash
+make init
+```
 
-This lab focuses on the continuous integration (CI) and continous delivery (CD)
-pipelines for deployment of ML models, as well as optimization of models for
-inference after training. Those operations allow safe, automated and efficient
-updates of models to production environment.
+2. To download model
+```bash
+make prepare_artifacts
+```
 
-We will use GitHub Actions for CI pipelines due to their simplicity and popularity.
-For model compilation and optimization, we will use ONNX tools to convert our models
-to a versatile and efficient format.
+3. To export model to ONNX 
+```bash
+make export_model_to_onnx
+```
 
-**Learning Plan**
-1. GitHub Actions workflows
-2. CI/CD pipelines for Python applications
-3. ONNX format and runtime
-4. Lightweight Docker images for ML inference
+4. To start app
+```bash
+make start
+```
 
-**Necessary software**
-- AWS account
-- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-- GitHub Account
-- [Docker and Docker Compose](https://docs.docker.com/engine/install/),
-  also [see those post-installation notes](https://docs.docker.com/engine/install/linux-postinstall/)
-- [uv](https://docs.astral.sh/uv/getting-started/installation/)
+5. To build docker
+```bash
+make build_docker
+```
 
-Note that you should also create and activate `uv` project.
+6. To start app with docker
+```bash
+make start_docker
+```
 
-**Lab**
-
-See [lab instruction](LAB_INSTRUCTION.md).
-
-**Homework**
-
-See [homework instruction](HOMEWORK.md).
+For other utilities navigate to [**Makefile**](Makefile)

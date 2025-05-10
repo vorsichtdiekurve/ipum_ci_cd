@@ -1,7 +1,43 @@
 [project]
-name = "ci-cd"
+name = "polish-sentiment-app"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
+
 dependencies = []
+
+[dependency-groups]
+inference = [
+    "onnxruntime>=1.21.1",
+    "tokenizers>=0.15.2",
+    "clean-text>=0.6.0",
+    "fastapi>=0.115.12",
+    "uvicorn>=0.34.2",
+    "numpy>=2.2.5",
+    "pydantic-settings>=2.9.1"
+]
+
+integration = [
+    "pre-commit>=4.2.0",
+    "pytest>=8.3.5",
+    "ruff>=0.11.8",
+    "pydantic-settings>=2.9.1",
+    "pip-audit>=2.9.0",
+]
+deployment = [
+    "torch>=2.7.0",
+    "transformers>=4.51.3",
+    "onnx>=1.17.0",
+    "onnxruntime>=1.21.1",
+    "numpy>=2.2.5",
+    "pydantic-settings>=2.9.1"
+]
+
+[tool.uv.sources]
+torch = { index = "pytorch" }
+
+[[tool.uv.index]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
