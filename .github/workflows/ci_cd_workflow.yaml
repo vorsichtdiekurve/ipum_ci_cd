@@ -43,7 +43,7 @@ jobs:
         run: uv sync --group deployment
 
       - name: Download model
-        run: python main.py --script download
+        run: uv run python main.py --script download
 
       - name: Export model
-        run: python main.py --script export
+        run: uv run python main.py --script export
