@@ -1,4 +1,4 @@
-FROM python:3.13-slim-bookworm as builder
+FROM python:3.12-slim-bookworm as builder
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ COPY pyproject.toml uv.lock ./
 
 RUN uv sync --group inference
 
-FROM python:3.13-slim-bookworm AS runtime
+FROM python:3.12-slim-bookworm AS runtime
 
 WORKDIR /app
 ENV PATH="/app/.venv/bin:$PATH"
