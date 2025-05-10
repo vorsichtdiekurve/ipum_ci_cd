@@ -1,0 +1,30 @@
+# our CI/CD workflow .yaml file
+
+name: CI/CD workflow
+
+on: workflow_dispatch
+
+jobs:
+   integration:
+      name: checks_and_tests
+      runs-on: ubuntu-latest
+      steps:
+         - name: Checkout code repo
+           # this action clones current repository to the VM where our job is running
+           # https://github.com/actions/checkout
+           uses: actions/checkout@v4
+
+         - name: Setup uv
+           run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+         - name: Install dependencies
+           run: uv sync --group integration
+
+         - name: Run ruff check
+           run: uv run ruff check
+
+         - name: Run pip-audit
+           run: uv run pip-audit --vulnerability-service pypi
+
+         - name: Run PyTest
+           run: uv run pytest tests
