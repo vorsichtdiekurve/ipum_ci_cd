@@ -2,10 +2,21 @@
 
 name: CI/CD workflow
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      steps:
+        description: 'Indicate what steps you want to run in the pipeline'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - integration
+          - all
 
 jobs:
   integration:
+    if: ${{ inputs.steps == 'integration' || inputs.steps == 'all' }}
     name: checks_and_tests
     runs-on: ubuntu-latest
     steps:
@@ -30,6 +41,8 @@ jobs:
         run: uv run pytest tests
 
   deployment:
+    needs: integration
+    if: ${{ inputs.steps == 'all' && needs.integration.result == 'success' }}
     name: model_deployment
     runs-on: ubuntu-latest
     steps:
